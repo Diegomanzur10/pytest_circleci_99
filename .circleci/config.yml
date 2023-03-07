@@ -10,7 +10,7 @@ jobs:
       - run: echo 'export PYTHONPATH="${PYTHONPATH}:{HOME}:/circleci-python"' >> $BASH_ENV
       - run: python -c "import sys; print(sys.executable)"
 
- test:
+  test:
     working_directory: ~/circleci-python
     docker:
       - image: "circleci/python:3.8"
@@ -20,14 +20,10 @@ jobs:
       - run: python -c "import sys; print(sys.executable)"
       - run: pytest test/test_main.py
 
+
 workflows:
   just_build:
     jobs:
       - build
 
-  build_test:
-    jobs:
-      - build
-      - test:
-          requires:
-            - build
+
