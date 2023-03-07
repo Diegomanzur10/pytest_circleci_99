@@ -14,3 +14,6 @@ def division(a: int, b: int) -> int:
         return a / b
     except ZeroDivisionError:
         return 1
+    
+def modulo(a: int, b: int) -> int:
+    return a % b
