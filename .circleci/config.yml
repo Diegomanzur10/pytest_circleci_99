@@ -22,6 +22,26 @@ jobs:
       - run: pytest test/test_main.py
 
 
+  build_39:
+    working_directory: ~/circleci-python
+    docker:
+      - image: "circleci/python:3.9"
+    steps:
+      - checkout
+      - run: echo 'export PYTHONPATH="${PYTHONPATH}:{HOME}:/circleci-python"' >> $BASH_ENV
+      - run: python -c "import sys; print(sys.executable)"
+
+  test_39:
+    working_directory: ~/circleci-python
+    docker:
+      - image: "circleci/python:3.9"
+    steps:
+      - checkout
+      - run: echo 'export PYTHONPATH="${PYTHONPATH}:{HOME}:/circleci-python"' >> $BASH_ENV
+      - run: python -c "import sys; print(sys.executable)"
+      - run: python -m pip install -r requirements.txt
+      - run: pytest test/test_main.py
+
 workflows:
   build_test:
     jobs:
@@ -29,3 +49,10 @@ workflows:
       - test:
           requires:
             - build
+
+  build_test_39:
+    jobs:
+      - build_39
+      - test_39:
+          requires:
+            - build_39

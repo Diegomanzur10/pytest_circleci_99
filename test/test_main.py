@@ -34,4 +34,4 @@ def test_division():
 
 
 def test_division():
-    assert modulo(3, 1) == 1
+    assert modulo(3, 1) == 0
